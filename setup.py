@@ -9,6 +9,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         "pydantic==2.10.5",
+        "numpy==1.26.4",
         "opencv-python-headless==4.9.0.80",
     ],
     entry_points={
