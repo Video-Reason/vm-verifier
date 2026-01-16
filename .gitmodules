@@ -1,0 +1,3 @@
+[submodule "template-data-generator"]
+	path = template-data-generator
+	url = https://github.com/vm-dataset/template-data-generator.git
