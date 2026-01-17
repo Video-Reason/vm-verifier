@@ -101,7 +101,16 @@ class VerificationEngine:
                 zip_ref.extractall(target_dir)
             
             # Find the actual extracted directory (may be nested)
-            extracted_dirs = [d for d in target_dir.iterdir() if d.is_dir()]
+            # Filter out system/hidden directories like __MACOSX, .git, __pycache__
+            extracted_dirs = [
+                d for d in target_dir.iterdir() 
+                if d.is_dir() 
+                and not d.name.startswith('.')        # Filter .git, .DS_Store, etc.
+                and d.name != '__MACOSX'              # Filter macOS metadata
+                and d.name != '__pycache__'           # Filter Python cache
+            ]
+            
+            # If only one valid directory, assume it's the project root
             if len(extracted_dirs) == 1:
                 return extracted_dirs[0]
             return target_dir
